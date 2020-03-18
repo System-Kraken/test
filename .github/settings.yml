@@ -25,8 +25,5 @@ repository:
   # If 'True' repo can have a wiki, if 'False' disable wiki functionality
   has_wiki: False
 
-  # Homepage for repo/project
-  homepage: https://github.com/System-Kraken/test
-
 
 
