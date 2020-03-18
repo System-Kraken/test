@@ -1,9 +1,6 @@
 repository:
   # See https://github.com/apps/settings for all available settings.
 
-  # The name of the repository. Changing this will rename the repository
-  name: test
-
   # Either `true` to make the repository private, or `false` to make it public.
   private: False
 
