@@ -29,19 +29,18 @@ jobs:
       
       - name: Setup Env Vars
         run: |
-          echo "TYPE=$(echo ${GITHUB_REF##*/} | cut -d'/' -f2)" >> $GITHUB_ENV
-          echo "FRUIT_NUMBER=$(echo ${GITHUB_REF##*/} | cut -d'/' -f3)" >> $GITHUB_ENV
+          echo "TYPE=$(echo ${{ github.ref }} | cut -d'/' -f4)" >> $GITHUB_ENV
+          echo "FRUIT_NUMBER=$(echo ${{ github.ref }} | cut -d'/' -f5)" >> $GITHUB_ENV
+          echo "ENV_NAME=$(echo ${{ github.ref }} | cut -d'/' -f3)" >> $GITHUB_ENV
           
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo ${{ secrets[format('FRUIT_{0}', env.FRUIT_NUMBER)] }}
-        
-      - name: Run a one-line script2
-        run: echo ${{ env.FRUIT_NUMBER }}
-        
-      - name: Run a one-line script3
-        run: echo ${{ env.TYPE }}
+        run: |
+          echo ${{ secrets[format('FRUIT_{0}', env.FRUIT_NUMBER)] }}
+          echo ${{ env.FRUIT_NUMBER }}
+          echo ${{ env.TYPE }}
+          echo ${{ env.ENV_NAME }}
 
       - name: Comment
         uses: JoseThen/comment-pr@v1.1.1
