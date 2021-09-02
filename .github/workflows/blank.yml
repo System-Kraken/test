@@ -29,9 +29,9 @@ jobs:
       
       - name: Setup Env Vars
         run: |
-          echo "TYPE=$(echo ${{ github.ref }} | cut -d'/' -f4)" >> $GITHUB_ENV
-          echo "FRUIT_NUMBER=$(echo ${{ github.ref }} | cut -d'/' -f5)" >> $GITHUB_ENV
-          echo "ENV_NAME=$(echo ${{ github.ref }} | cut -d'/' -f3)" >> $GITHUB_ENV
+          echo "TYPE=$(echo ${{ github.head_ref }} | cut -d'/' -f4)" >> $GITHUB_ENV
+          echo "FRUIT_NUMBER=$(echo ${{ github.head_ref }} | cut -d'/' -f5)" >> $GITHUB_ENV
+          echo "ENV_NAME=$(echo ${{ github.head_ref }} | cut -d'/' -f3)" >> $GITHUB_ENV
           
 
       # Runs a single command using the runners shell
