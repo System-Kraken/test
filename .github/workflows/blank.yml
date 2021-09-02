@@ -29,8 +29,8 @@ jobs:
       
       - name: Setup Env Vars
         run: |
-          echo "TYPE=$(echo ${GITHUB_REF##*/}} | cut -d'/' -f2)" >> $GITHUB_ENV
-          echo "FRUIT_NUMBER=$(echo ${GITHUB_REF##*/}} | cut -d'/' -f3)" >> $GITHUB_ENV
+          echo "TYPE=$(echo ${GITHUB_REF##*/} | cut -d'/' -f2)" >> $GITHUB_ENV
+          echo "FRUIT_NUMBER=$(echo ${GITHUB_REF##*/} | cut -d'/' -f3)" >> $GITHUB_ENV
           
 
       # Runs a single command using the runners shell
