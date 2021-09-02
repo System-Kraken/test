@@ -42,8 +42,10 @@ jobs:
           echo ${{ env.TYPE }}
           echo ${{ env.ENV_NAME }}
 
-      - name: Comment
-        uses: JoseThen/comment-pr@v1.1.1
+      - uses: actions/github-script@v4
+        id: set-result
         with:
-          comment: ${{ secrets[format('FRUIT_{0}', env.FRUIT_NUMBER)] }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          script: return "Hello! ${{ secrets[format('FRUIT_{0}', env.FRUIT_NUMBER)] }}"
+          result-encoding: string
+      - name: Get result
+        run: echo "${{steps.set-result.outputs.result}}"
