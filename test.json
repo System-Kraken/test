@@ -1,4 +1,4 @@
 {
-  "account_A": ["apple-app", "banana-app", "cantaloupe-app"],
-  "account_B": ["dragonfruit-app", "egg-app", "fig-app"]
+  "accountA": ["apple-app", "banana-app", "cantaloupe-app"],
+  "accountB": ["dragonfruit-app", "egg-app", "fig-app"]
 }
