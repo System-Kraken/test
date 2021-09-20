@@ -31,12 +31,21 @@ jobs:
           cat test.json | jq .$ACCOUNT_NAME
           cat test.json
           cat test.json | jq .accountA
-          
-      
-    
-  theory:
+  
+  debugger:
     runs-on: ubuntu-latest
     needs: setup
+    steps:
+      - name: Testing
+        run: |
+          echo ${{ needs.setup.outputs.applications }}
+          ${{fromJson(needs.setup.outputs.applications)}}
+          
+          
+  
+  theory:
+    runs-on: ubuntu-latest
+    needs: debugger
     strategy:
       matrix:
         application: ${{ needs.setup.outputs.applications }}
