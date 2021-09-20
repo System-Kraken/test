@@ -29,6 +29,9 @@ jobs:
       - name: debug
         run: |
           cat test.json | jq .$ACCOUNT_NAME
+          cat test.json
+          cat test.json | jq .accountA
+          
       
     
   theory:
