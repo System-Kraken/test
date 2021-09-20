@@ -24,14 +24,13 @@ jobs:
       - name: output applications
         id: output-applications
         run: |
-          application_matrix=$( jq .$ACCOUNT_NAME test.json | jq -sR '.')
-          echo "::set-output name=applications::{\"include\":$(echo $application_matrix)}\"
+          echo "::set-output name=applications::$( jq .$ACCOUNT_NAME test.json | jq -c)"
 
       - name: debug
         run: |
-          jq .$ACCOUNT_NAME test.json | jq -sR '.'
+          jq .$ACCOUNT_NAME test.json | jq -c
           cat test.json
-          jq .accountA test.json | jq -sR '.'
+          jq .accountA test.json | jq -c
 
   debugger:
     runs-on: ubuntu-latest
@@ -40,13 +39,14 @@ jobs:
       - name: Testing
         run: |
           echo ${{ needs.setup.outputs.applications }}
-          echo ${{fromJSON(needs.setup.outputs.applications)}}
+          # echo ${{fromJSON(needs.setup.outputs.applications)}}
 
   theory:
     runs-on: ubuntu-latest
     needs: debugger
     strategy:
-      matrix: ${{needs.setup.outputs.applications}}
+      matrix:
+        application: ${{needs.setup.outputs.applications}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
