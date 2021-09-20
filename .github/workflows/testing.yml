@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: debugger
     strategy:
-      matrix: ${{fromJSON(needs.setup.outputs.matrix)}}
+      matrix: ${{fromJson(needs.setup.outputs.matrix)}}
     steps:
       - name: Test my Theory
         run: |
