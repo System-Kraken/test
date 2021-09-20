@@ -30,15 +30,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        cfg:
+        include:
         - {app: app-a, account: accountA}
         - {app: app-b, account: accountA}
         - {app: app-c, account: accountA}
         - {app: app-d, account: accountB}
         - {app: app-e, account: accountB}
         - {app: app-f, account: accountB}
-    if: matrix.cfg.account == needs.setup.outputs.account
+    if: matrix.account == needs.setup.outputs.account
     steps:
       - name: Test my Theory
         run: |
-          echo ${{ matrix.cfg.app }}
+          echo ${{ matrix.app }}
