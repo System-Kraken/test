@@ -24,7 +24,7 @@ jobs:
       - name: output applications
         id: output-matrix
         run: |
-          echo "::set-output name=matrix::$( jq -c .$ACCOUNT_NAME test.json | jq -R '.')"
+          echo "::set-output name=matrix::$( cat test.json| jq -c .$ACCOUNT_NAME | jq -R '.')"
 
       - name: debug
         run: |
