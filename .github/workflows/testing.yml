@@ -10,35 +10,43 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      account: ${{ steps.output-accpimt.outputs.account }}
-      environment: ${{ steps.output-accpimt.outputs.environment }}
+      applications: ${{ steps.output-matrix.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: output account
-        id: output-account
+      - name: Set Environment Variables
         run: |
-          echo "::set-output name=account::$(echo ${{ github.ref }} | cut -d'/' -f3)"
+          # Branch Convention: ENV_NAME/AWS_ACCOUNT_ID/APP
+          echo "ACCOUNT_NAME=$(echo ${{ github.ref }} | cut -d'/' -f3)" >> $GITHUB_ENV
+          echo "ENV_NAME=$(echo ${{ github.ref }} | cut -d'/' -f4)" >> $GITHUB_ENV
 
-      - name: output environment
-        id: output-environment
+      - name: output applications
+        id: output-matrix
         run: |
-          echo "::set-output name=environment::$(echo ${{ github.ref }} | cut -d'/' -f4)"
+          echo "::set-output name=matrix::$( jq .$ACCOUNT_NAME test.json | jq -sR '.')"
+
+      - name: debug
+        run: |
+          jq .$ACCOUNT_NAME test.json | jq -sR '.'
+          cat test.json
+          jq .accountA test.json | jq -sR '.'
+
+  debugger:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Testing
+        run: |
+          echo ${{ needs.setup.outputs.matrix }}
+          echo ${{fromJSON(needs.setup.outputs.matrix)}}
 
   theory:
     runs-on: ubuntu-latest
+    needs: debugger
     strategy:
-      matrix:
-        include:
-        - {app: app-a, account: accountA}
-        - {app: app-b, account: accountA}
-        - {app: app-c, account: accountA}
-        - {app: app-d, account: accountB}
-        - {app: app-e, account: accountB}
-        - {app: app-f, account: accountB}
-    if: matrix.account == needs.setup.outputs.account
+      matrix: ${{fromJSON(needs.setup.outputs.matrix)}}
     steps:
       - name: Test my Theory
         run: |
-          echo ${{ matrix.app }}
+          echo ${{ matrix.application }}
