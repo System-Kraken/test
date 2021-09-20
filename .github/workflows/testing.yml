@@ -37,10 +37,9 @@ jobs:
   theory:
     runs-on: ubuntu-latest
     needs: setup
-    if: "${{fromJSON(needs.setup.outputs.applications)}}"
     strategy:
       matrix:
-        application: ${{fromJSON(needs.setup.outputs.applications)}}
+        application: ${{ needs.setup.outputs.applications }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
