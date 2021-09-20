@@ -39,10 +39,7 @@ jobs:
       - name: Testing
         run: |
           echo ${{ needs.setup.outputs.applications }}
-          ${{fromJson(needs.setup.outputs.applications)}}
           
-          
-  
   theory:
     runs-on: ubuntu-latest
     needs: debugger
