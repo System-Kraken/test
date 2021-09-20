@@ -24,13 +24,13 @@ jobs:
       - name: output applications
         id: output-applications
         run: |
-          echo "::set-output name=applications::$( jq .$ACCOUNT_NAME test.json | jq-sR '.')"
+          echo "::set-output name=applications::$( jq .$ACCOUNT_NAME test.json | jq -sR '.')"
 
       - name: debug
         run: |
-          cat test.json | jq .$ACCOUNT_NAME
+          jq .$ACCOUNT_NAME test.json | jq -sR '.'
           cat test.json
-          cat test.json | jq .accountA
+          jq .accountA test.json | jq -sR '.'
 
   debugger:
     runs-on: ubuntu-latest
