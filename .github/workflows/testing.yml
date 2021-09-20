@@ -24,13 +24,13 @@ jobs:
       - name: output applications
         id: output-matrix
         run: |
-          echo "::set-output name=matrix::$( jq .$ACCOUNT_NAME test.json | jq -sR '.')"
+          echo "::set-output name=matrix::$( jq -c .$ACCOUNT_NAME test.json | jq -R '.')"
 
       - name: debug
         run: |
-          jq .$ACCOUNT_NAME test.json | jq -sR '.'
+          jq -c .$ACCOUNT_NAME test.json | jq -R '.'
           cat test.json
-          jq .accountA test.json | jq -sR '.'
+          jq -c .accountA test.json | jq -R '.'
 
   debugger:
     runs-on: ubuntu-latest
