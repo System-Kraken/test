@@ -26,6 +26,10 @@ jobs:
         run: |
           echo "::set-output name=applications::$(cat test.json | jq .$ACCOUNT_NAME)"
       
+      - name: debug
+        run: |
+          cat test.json | jq .$ACCOUNT_NAME
+      
     
   theory:
     runs-on: ubuntu-latest
