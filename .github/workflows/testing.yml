@@ -41,4 +41,4 @@ jobs:
     steps:
       - name: Test my Theory
         run: |
-          echo ${{ matrixcfg.app }}
+          echo ${{ matrix.cfg.app }}
