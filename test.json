@@ -1,4 +1,18 @@
 {
-  "accountA": ["apple-app", "banana-app", "cantaloupe-app"],
-  "accountB": ["dragonfruit-app", "egg-app", "fig-app"]
+  "accountA": {
+    "include": [
+      {"app": "app-1"},
+      {"app": "app-2"},
+      {"app": "app-3"},
+      {"app": "app-4"}
+    ]
+  },
+  "accountB": {
+    "include": [
+      {"app": "app-5"},
+      {"app": "app-6"},
+      {"app": "app-7"},
+      {"app": "app-8"}
+    ]
+  }
 }
