@@ -41,7 +41,7 @@ jobs:
     steps:
       - name: Testing
         run: |
-          echo ${{ needs.setup.outputs.matrix }}
+          echo ${{ toJson(needs.setup.outputs.matrix) }}
 
   theory:
     runs-on: ubuntu-latest
