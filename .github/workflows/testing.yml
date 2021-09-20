@@ -33,7 +33,6 @@ jobs:
           jq -c .$ACCOUNT_NAME test.json | jq -R '.'
           cat test.json
           jq -c .accountA test.json | jq -R '.'
-          echo ${{ needs.setup.outputs.matrix }}
 
   debugger:
     runs-on: ubuntu-latest
@@ -42,6 +41,8 @@ jobs:
       - name: Testing
         run: |
           echo ${{ fromJson(needs.setup.outputs.matrix) }}
+          echo ${{ toJson(needs.setup.outputs.matrix) }}
+          echo ${{ needs.setup.outputs.matrix }}
 
   theory:
     runs-on: ubuntu-latest
