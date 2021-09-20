@@ -10,7 +10,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      applications: ${{ steps.output-matrix.outputs.matrix }}
+      matrix: ${{ steps.output-matrix.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
