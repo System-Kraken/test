@@ -24,7 +24,7 @@ jobs:
       - name: output applications
         id: output-applications
         run: |
-          echo "::set-output name=applications::$(echo test.json | jq .$ACCOUNT_NAME)"
+          echo "::set-output name=applications::$(cat test.json | jq .$ACCOUNT_NAME)"
       
     
   theory:
