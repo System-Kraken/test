@@ -24,7 +24,8 @@ jobs:
       - name: output applications
         id: output-matrix
         run: |
-          echo "::set-output name=matrix::$( cat test.json| jq -c .$ACCOUNT_NAME | jq -R '.')"
+          matrix=$( jq -c .$ACCOUNT_NAME test.json | jq -R '.')
+          echo "::set-output name=matrix::$matrix"
 
       - name: debug
         run: |
@@ -39,6 +40,7 @@ jobs:
       - name: Testing
         run: |
           echo ${{ needs.setup.outputs.matrix }}
+          # echo ${{fromJSON(needs.setup.outputs.matrix)}}
 
   theory:
     runs-on: ubuntu-latest
